@@ -1,0 +1,38 @@
+EMPLOYMENT AGREEMENT
+
+This Employment Agreement ("Agreement") is made effective as of October 1, 2025, between Digital Solutions LLC, a California limited liability company ("Company"), and Jane Doe ("Employee").
+
+1. EMPLOYMENT
+Company hereby employs Employee as a Senior Software Developer, and Employee hereby accepts such employment, subject to the terms and conditions set forth in this Agreement.
+
+2. DUTIES AND RESPONSIBILITIES
+Employee shall perform the duties and responsibilities of a Senior Software Developer, including but not limited to:
+- Developing and maintaining software applications
+- Collaborating with cross-functional teams
+- Participating in code reviews and technical discussions
+- Mentoring junior developers
+
+3. COMPENSATION
+As compensation for services rendered, Company shall pay Employee a base salary of One Hundred Twenty Thousand Dollars ($120,000) per year, payable in accordance with Company's standard payroll practices.
+
+4. BENEFITS
+Employee shall be entitled to participate in all benefit programs generally available to Company employees, including health insurance, dental insurance, and retirement plans.
+
+5. CONFIDENTIALITY
+Employee acknowledges that during employment, Employee may have access to confidential and proprietary information. Employee agrees to maintain strict confidentiality of all such information.
+
+6. TERMINATION
+Either party may terminate this Agreement with thirty (30) days written notice. Company may terminate Employee immediately for cause.
+
+7. NON-COMPETE
+For a period of one (1) year following termination, Employee shall not engage in any business that directly competes with Company within a 50-mile radius of Company's headquarters.
+
+8. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of California.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement.
+
+Digital Solutions LLC                   Jane Doe
+_____________________                  _____________________
+Michael Brown, CEO                     Jane Doe, Employee
+Date: October 1, 2025                 Date: October 1, 2025

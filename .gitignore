@@ -1,0 +1,88 @@
+# ClauseWise .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+clausewise_env/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Uploaded files
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+cache/
+
+# Models (if downloaded locally)
+models/
+*.bin
+*.pkl
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis
+dump.rdb
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Test results
+.pytest_cache/
+.tox/

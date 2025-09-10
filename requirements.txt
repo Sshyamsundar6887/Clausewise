@@ -1,0 +1,52 @@
+# ClauseWise - AI Legal Document Analyzer
+# Python Dependencies
+
+# Core Machine Learning and NLP
+torch>=1.9.0
+transformers>=4.20.0
+accelerate>=0.20.0
+spacy>=3.4.0
+
+# Document Processing
+PyMuPDF>=1.20.0  # For PDF processing
+python-docx>=0.8.11  # For DOCX processing
+docx2txt>=0.8  # Alternative DOCX processing
+pdf2docx>=0.5.6  # PDF to DOCX conversion
+pypdf>=3.0.0  # Alternative PDF processing
+
+# Web Framework and Interface
+gradio>=3.40.0  # For web interface
+fastapi>=0.95.0  # For API endpoints
+uvicorn>=0.20.0  # ASGI server
+streamlit>=1.25.0  # Alternative web framework
+
+# Data Processing and Analysis
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+nltk>=3.7
+textblob>=0.17.1
+
+# Utilities and Support
+python-multipart>=0.0.5  # For file uploads
+requests>=2.28.0
+aiofiles>=22.1.0  # Async file handling
+python-dotenv>=0.19.0  # Environment variables
+pydantic>=1.10.0  # Data validation
+
+# Security and Validation
+cryptography>=37.0.0
+python-magic>=0.4.27  # File type detection
+pillow>=9.0.0  # Image processing for security
+
+# Development and Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=22.0.0  # Code formatting
+flake8>=5.0.0  # Linting
+mypy>=0.991  # Type checking
+
+# Production Deployment
+gunicorn>=20.1.0  # WSGI server for production
+supervisor>=4.2.0  # Process management
+redis>=4.3.0  # Caching and session management

@@ -1,0 +1,36 @@
+NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement ("Agreement") is entered into on September 9, 2025, between TechCorp Inc., a Delaware corporation located at 123 Tech Street, San Francisco, CA 94105 ("Disclosing Party"), and John Smith, an individual residing at 456 Main Avenue, New York, NY 10001 ("Receiving Party").
+
+RECITALS
+
+WHEREAS, Disclosing Party possesses certain proprietary and confidential information relating to software development technologies; and
+
+WHEREAS, Receiving Party desires to evaluate potential business opportunities with Disclosing Party;
+
+NOW, THEREFORE, in consideration of the mutual covenants contained herein, the parties agree as follows:
+
+1. CONFIDENTIAL INFORMATION
+The Receiving Party acknowledges that during the course of discussions regarding potential software development services, the Disclosing Party may disclose certain confidential and proprietary information including but not limited to: technical data, trade secrets, know-how, research, product plans, products, services, customers, customer lists, markets, software, developments, inventions, processes, formulas, technology, designs, drawings, engineering, hardware configuration information, marketing, finances, or other business information.
+
+2. NON-DISCLOSURE OBLIGATIONS
+The Receiving Party agrees that all information disclosed by the Disclosing Party, whether oral or written, shall be held in strict confidence for a period of five (5) years from the date of disclosure. The Receiving Party shall not disclose any confidential information to third parties without prior written consent of the Disclosing Party.
+
+3. PERMITTED USE
+The Receiving Party shall not use such information for any purpose other than evaluating the potential business relationship between the parties.
+
+4. RETURN OF INFORMATION
+Upon termination of discussions or upon request by the Disclosing Party, all documents and materials containing confidential information shall be returned immediately.
+
+5. GOVERNING LAW
+This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware.
+
+6. TERM
+This Agreement shall remain in effect for a period of five (5) years from the date first written above.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first written above.
+
+TechCorp Inc.                          John Smith
+_____________________                  _____________________
+Sarah Johnson, CEO                     John Smith
+Date: September 9, 2025               Date: September 9, 2025
