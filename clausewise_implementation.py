@@ -11,7 +11,7 @@ from datetime import datetime
 import logging
 import gradio as gr
 import tempfile
-import hashlib
+import hashlib  
 from pathlib import Path
 import torch
 from dotenv import load_dotenv
@@ -24,7 +24,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class ClauseWiseAnalyzer:
+class ClauseWiseAnalyzer:   
     """
     Main analyzer class that integrates IBM Granite with document processing
     and NER capabilities for legal document analysis.
