@@ -873,7 +873,7 @@ def format_classification(results: Dict[str, Any]) -> str:
             *[f'<div class="indicator-tag">{indicator}</div>' for indicator in indicators],
             '</div>',
             '</div>'
-        ])
+        ])########
     
     parts.append('</div>')
     return "\n".join(parts)
