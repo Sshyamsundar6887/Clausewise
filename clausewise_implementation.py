@@ -815,7 +815,7 @@ def format_clauses(results: Dict[str, Any]) -> str:
                     f'</div>'
                     f'<div class="clause-text">{clause.get("text", "")}</div>'
                     f'</div>'
-                )
+                )###
             
             parts.extend(['</div>', '</div>'])
     
