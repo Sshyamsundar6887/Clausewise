@@ -3,7 +3,7 @@
 
 This guide provides comprehensive instructions for deploying ClauseWise using different methods.
 
-## Quick Start with Gradio
+## Quick Start with React and FastAPI
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -44,7 +44,7 @@ This guide provides comprehensive instructions for deploying ClauseWise using di
 
 5. **Access the application**
    - Local: http://localhost:7860
-   - Public link will be generated automatically for sharing
+   - The React interface is served at the same address as the API
 
 ## Production Deployment Options
 
@@ -54,7 +54,7 @@ This guide provides comprehensive instructions for deploying ClauseWise using di
 
    Create `Procfile`:
    ```
-   web: python clausewise_implementation.py --server.port=$PORT --server.address=0.0.0.0
+   web: python clausewise_implementation.py
    ```
 
    Create `runtime.txt`:

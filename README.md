@@ -2,7 +2,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Gradio](https://img.shields.io/badge/Interface-Gradio-orange)](https://gradio.app/)
+[![React](https://img.shields.io/badge/Interface-React-61dafb)](https://react.dev/)
 [![IBM Granite](https://img.shields.io/badge/AI-IBM%20Granite-blue)](https://www.ibm.com/granite)
 
 ClauseWise is an innovative AI-powered legal document analyzer that simplifies, decodes, and classifies complex legal texts. Built for lawyers, businesses, and laypersons alike, it uses cutting-edge generative AI to make legal documents more accessible and understandable.
@@ -46,7 +46,7 @@ ClauseWise is an innovative AI-powered legal document analyzer that simplifies, 
 - Intelligent handling of complex document layouts
 
 ### 🖥️ **User-Friendly Interface**
-- Modern Gradio-based web interface
+- Modern React web interface served by FastAPI
 - Intuitive tabbed layout for different analysis modes
 - Real-time processing with progress indicators
 - Mobile-responsive design
@@ -55,7 +55,7 @@ ClauseWise is an innovative AI-powered legal document analyzer that simplifies, 
 
 - **AI/ML**: IBM Granite 3.2, spaCy NLP, PyTorch, Transformers
 - **Document Processing**: PyMuPDF, python-docx, docx2txt
-- **Web Interface**: Gradio, HTML5, CSS3, JavaScript
+- **Web Interface**: React, HTML5, CSS3, JavaScript
 - **Backend**: Python 3.8+, FastAPI (optional)
 - **Deployment**: Docker, Heroku, AWS, Google Cloud
 
@@ -99,16 +99,16 @@ ClauseWise is an innovative AI-powered legal document analyzer that simplifies, 
    ```
 
 5. **Access the web interface**
-   Open your browser and navigate to: http://localhost:7860
+   Open your browser and navigate to: http://localhost:7860. The interface is a React client served by the FastAPI backend.
 
 ## 🚀 Usage
 
 ### Web Interface
 
 1. **Upload Document**: Drag and drop or select a legal document (PDF, DOCX, or TXT)
-2. **Choose Analysis Mode**: Navigate through different tabs for various analysis types
+2. **Choose Analysis Mode**: Navigate through the React tabs for various analysis types
 3. **Review Results**: Examine simplified clauses, extracted entities, and document classification
-4. **Export Results**: Copy or download analysis results for further use
+4. **Review Results**: Compare plain-English clauses, entities, classifications, and risk signals
 
 ### Python API
 
@@ -132,7 +132,8 @@ summary = results['summary']
 
 ```
 clausewise-legal-analyzer/
-├── clausewise_implementation.py  # Main application file
+├── clausewise_implementation.py  # FastAPI backend and analyzer
+├── frontend/                     # React, HTML, and CSS client
 ├── requirements.txt              # Python dependencies
 ├── README.md                    # Project documentation
 ├── docs/                        # Documentation files
@@ -211,7 +212,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **IBM Granite Team** for providing advanced language models
 - **spaCy Team** for excellent NLP libraries
-- **Gradio Team** for the intuitive web interface framework
+- **React and FastAPI communities** for the web application foundations
 - **Legal AI Research Community** for inspiration and guidance
 
 ## 📞 Support

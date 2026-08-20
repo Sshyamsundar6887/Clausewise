@@ -9,13 +9,18 @@ import json
 import re
 from datetime import datetime
 import logging
-import gradio as gr
 import tempfile
 import hashlib  
 from pathlib import Path   
 import torch
 from dotenv import load_dotenv
 from huggingface_hub import login
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+import uvicorn
+
+gr = Any
 
 # Load environment variables from .env file
 load_dotenv()
@@ -917,6 +922,8 @@ def create_gradio_interface():
     custom_css = """
     
 /* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
+
 .gradio-container {
     max-width: 1600px !important;
     margin: auto;
@@ -925,36 +932,70 @@ def create_gradio_interface():
 
 /* Header Styling */
 .main-header {
-    background: linear-gradient(135deg, #5360a0 0%, #5b3d7a 100%); /* Darker blue/purple gradient */
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: linear-gradient(90deg, rgba(20, 11, 9, 0.9) 0%, rgba(20, 11, 9, 0.62) 46%, rgba(20, 11, 9, 0.2) 100%), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1800&q=85');
+    background-position: center;
+    background-size: cover;
     color: white;
-    padding: 40px 20px;
-    border-radius: 15px;
+    padding: 48px 56px;
+    border-radius: 18px;
     margin-bottom: 30px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(83, 96, 160, 0.5);
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(25, 16, 12, 0.35);
+}
+
+.upload-row,
+.results-row {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .main-title {
-    font-size: 3.5em;
+    max-width: 590px;
+    font-family: 'Abhaya Libre', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    line-height: 0.98;
+    margin: 12px 0 18px;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.45);
 }
 
 .main-subtitle {
-    font-size: 1.4em;
-    font-weight: 300;
-    margin-bottom: 20px;
+    order: -1;
+    font-family: 'Abhaya Libre', Georgia, serif;
+    font-size: 1.35em;
+    font-weight: 600;
+    margin: 0;
     opacity: 0.95;
 }
 
 .main-description {
-    font-size: 1.1em;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 520px;
+    font-family: 'Abhaya Libre', Georgia, serif;
+    font-size: 1.15em;
+    line-height: 1.45;
+    margin: 0;
     opacity: 0.95;
-    color: #ddd;
+    color: #f0e7df;
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        min-height: 380px;
+        padding: 36px 28px;
+        background-position: 62% center;
+    }
+
+    .main-title {
+        font-size: 3.2rem;
+    }
 }
 
 /* Sidebar Styling */
@@ -982,12 +1023,17 @@ def create_gradio_interface():
 .file-upload {
     border: 3px dashed #5360a0;
     border-radius: 15px;
-    padding: 40px 20px;
+    padding: 20px 12px;
     text-align: center;
     background: linear-gradient(145deg, #fbfcfe, #e7eefb);
     transition: all 0.3s ease;
-    margin: 20px 0;
-    color: #2e2e2e;
+    margin: 12px 0;
+    color: #17242b !important;
+    min-height: 120px;
+}
+
+.file-upload * {
+    color: #17242b !important;
 }
 
 .file-upload:hover {
@@ -1943,6 +1989,147 @@ def create_gradio_interface():
         grid-template-columns: 1fr;
     }
 }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .gradio-container {
+        width: 100% !important;
+        padding: 16px clamp(12px, 3vw, 40px) 28px !important;
+    }
+
+    .upload-row,
+    .results-row,
+    .upload-row > div,
+    .results-row > div {
+        min-width: 0 !important;
+    }
+
+    .upload-sidebar,
+    .output-area {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .tab-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tab-nav button {
+        white-space: nowrap;
+    }
+
+    .output-area img,
+    .output-area table,
+    .output-area pre {
+        max-width: 100%;
+    }
+
+    @media (max-width: 900px) {
+        .main-header {
+            min-height: 360px;
+            padding: 40px clamp(24px, 6vw, 48px);
+        }
+
+        .upload-sidebar {
+            margin-right: 0;
+        }
+
+        .upload-title {
+            font-size: 1.55em;
+        }
+
+        .feature-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .gradio-container {
+            padding: 8px 10px 20px !important;
+        }
+
+        .main-header {
+            min-height: 330px;
+            padding: 32px 22px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+        }
+
+        .main-title {
+            max-width: 100%;
+            font-size: clamp(2.6rem, 14vw, 3.6rem);
+        }
+
+        .main-subtitle {
+            font-size: 1.1em;
+        }
+
+        .main-description {
+            max-width: 100%;
+            font-size: 1em;
+        }
+
+        .upload-sidebar,
+        .output-area {
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .file-upload {
+            min-height: 96px;
+            padding: 14px 8px;
+        }
+
+        .analyze-button {
+            margin: 12px 0;
+            padding: 12px 16px;
+            font-size: 1em;
+        }
+
+        .tab-nav {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 4px;
+        }
+
+        .tab-nav button {
+            flex: 0 0 auto;
+            font-size: 0.82em;
+            padding: 10px 12px;
+        }
+
+        .output-area {
+            min-height: 300px;
+            padding: 14px;
+        }
+
+        .no-data {
+            padding: 44px 16px;
+            font-size: 0.95em;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-section {
+            padding: 26px 18px;
+        }
+    }
+
     """
 
     # Create Gradio interface with enhanced styling
@@ -1955,25 +2142,20 @@ def create_gradio_interface():
         # Enhanced header with modern design
         gr.HTML("""
         <div class="main-header">
-            <h1 class="main-title">⚖️ ClauseWise</h1>
-            <h2 class="main-subtitle">AI-Powered Legal Document Analyzer</h2>
+            <h1 class="main-title">ClauseWise</h1>
+            <h2 class="main-subtitle">Your trusted legal document companion</h2>
             <p class="main-description">
-                Transform complex legal documents into clear, understandable insights with cutting-edge AI technology. 
-                Upload your legal document to get comprehensive analysis including clause simplification, 
-                entity recognition, document classification, and risk assessment.
+                Transform complex legal documents into clear, understandable insights with AI-powered analysis.
             </p>
         </div>
         """)
 
-        # Main content area with enhanced layout
-        with gr.Row():
-            # Enhanced sidebar for file upload
-            with gr.Column(scale=3):
+        with gr.Row(elem_classes=["upload-row"]):
+            with gr.Column(elem_classes=["upload-sidebar"]):
                 gr.HTML("""
-                <div class="upload-sidebar">
-                    <h3 class="upload-title">📁 Document Upload</h3>
+                <h3 class="upload-title">📁 Document Upload</h3>
                 """)
-                
+
                 file_input = gr.File(
                     label="Select Legal Document",
                     file_types=[".pdf", ".docx", ".txt"],
@@ -2000,11 +2182,10 @@ def create_gradio_interface():
                             <li>Scanned documents may have lower accuracy</li>
                         </ul>
                     </div>
-                </div>
                 """)
 
-            # Enhanced main content area for results
-            with gr.Column(scale=7):
+        with gr.Row(elem_classes=["results-row"]):
+            with gr.Column():
                 with gr.Tabs() as tabs:
                     with gr.TabItem("📋 Overview", elem_id="overview-tab"):
                         overview_output = gr.HTML(
@@ -2118,20 +2299,72 @@ def create_gradio_interface():
 
         return interface
 
+app = FastAPI(title="ClauseWise - AI Legal Document Analyzer")
+frontend_path = Path(__file__).parent / "frontend"
+analyzer = None
+
+
+def get_analyzer() -> ClauseWiseAnalyzer:
+    """Load the expensive analyzer only when the API receives its first request."""
+    global analyzer
+    if analyzer is None:
+        analyzer = ClauseWiseAnalyzer()
+    return analyzer
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+
+@app.post("/api/analyze")
+async def analyze_uploaded_file(file: UploadFile = File(...)):
+    """Validate and analyze one uploaded legal document."""
+    current_analyzer = get_analyzer()
+    filename = file.filename or "document"
+    file_ext = Path(filename).suffix.lower()
+
+    if file_ext not in current_analyzer.supported_formats:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported format. Supported: {', '.join(current_analyzer.supported_formats)}"
+        )
+
+    content = await file.read()
+    if len(content) > current_analyzer.max_file_size:
+        raise HTTPException(
+            status_code=413,
+            detail=f"File too large. Maximum size is {current_analyzer.max_file_size / (1024 * 1024):.1f}MB"
+        )
+
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext, dir="uploads") as temp_file:
+            temp_file.write(content)
+            temp_path = temp_file.name
+        results = current_analyzer.analyze_document(temp_path)
+        results["document_info"]["filename"] = filename
+        return results
+    except Exception as exc:
+        logger.exception("Error processing uploaded file")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {exc}") from exc
+    finally:
+        if temp_path:
+            Path(temp_path).unlink(missing_ok=True)
+
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse(frontend_path / "index.html")
+
+
+app.mount("/assets", StaticFiles(directory=frontend_path), name="assets")
+
+
 if __name__ == "__main__":
-    # Load environment variables
     load_dotenv()
-
-    # Get server configuration from environment
-    host = os.getenv('HOST', '0.0.0.0')
-    port = int(os.getenv('PORT', 7860))
-    debug = os.getenv('DEBUG', 'True').lower() == 'true'
-
-    # Create and launch Gradio interface
-    interface = create_gradio_interface()
-    interface.launch(
-        server_name=host,
-        server_port=port,
-        share=True,  # Set to True to create public link
-        show_error=debug
+    uvicorn.run(
+        app,
+        host=os.getenv("HOST", "0.0.0.0"),
+        port=int(os.getenv("PORT", 7860)),
     )

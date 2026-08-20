@@ -5,7 +5,7 @@
 
 ClauseWise follows a modular architecture designed for scalability and maintainability with:
 
-- **Frontend Layer**: Gradio web interface with responsive design
+- **Frontend Layer**: React client using HTML, CSS, and JavaScript, served by FastAPI
 - **Application Layer**: File processing and analysis coordination
 - **AI/ML Layer**: IBM Granite integration with spaCy NER
 - **Data Layer**: File storage and optional caching
@@ -35,7 +35,8 @@ ClauseWise follows a modular architecture designed for scalability and maintaina
 - **spaCy 3.4+**: Named entity recognition and NLP processing
 - **PyMuPDF**: PDF text extraction
 - **python-docx**: DOCX document processing
-- **Gradio**: Web interface framework
+- **React**: Web interface library
+- **FastAPI**: JSON API and static asset server
 
 ### Performance Characteristics
 
